@@ -1,16 +1,12 @@
 import { Router } from 'express';
-import mongoose from 'mongoose';
-import courseSchema from '../models/course';
-
-const Course = mongoose.model('Course', courseSchema);
+import Course from '../models/course'
 
 const courseController = Router();
 
 courseController.get('/', (req, res) => {
-  Course.find({}, (error: any, data: any) => {
+  Course.find({}, (error: Error, data: any) => {
     if(error) {
-      console.error(error.message);
-      res.render('courses', { error: error.message });
+      throw error;
     }else {
       console.log(data);
       res.render('courses', { courses: data });
@@ -23,11 +19,11 @@ courseController.get('/add', (req, res) => {
 });
 
 courseController.post('/add', (req, res) => {
+  console.log(req.body);
   const newCourse = new Course(req.body);
-  newCourse.save((error: any, data: any) => {
+  newCourse.save((error: Error, data: any) => {
     if(error) {
-      console.log(error);
-      res.writeHead(500);
+      throw error;
     } else {
       res.redirect('/courses');
     }

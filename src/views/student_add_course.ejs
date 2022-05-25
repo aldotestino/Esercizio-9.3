@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestione studenti</title>
+</head>
+
+<body>
+  <h1>Aggiungi corso a studente</h1>
+  <form action="/students/addcourse" method="post">
+    <label for="student_id"></label>
+    <input type="text" name="student_id" id="student_id">
+    <select name="course_id" id="course_id">
+      <% for(let i=0; i < courses.length; i++) { %>
+        <option value=<%=courses[i]._id %>>
+          <%= courses[i].name %> - <%= courses[i].type %>
+        </option>
+        <% } %>
+    </select>
+    <button type="submit">Aggiungi</button>
+  </form>
+</body>
+
+</html>

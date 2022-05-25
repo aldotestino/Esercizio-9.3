@@ -1,23 +1,14 @@
-import { Schema } from 'mongoose';
-
-class BirthDate {
-  day: number;
-  month: number;
-  year: number;
-
-  constructor(day: number, month: number, year: number) {
-    this.day = day;
-    this.month = month;
-    this.year = year;
-  }
-}
+import mongoose, { Schema } from 'mongoose';
 
 const studentSchema = new Schema({
-  studentId: Number,
   firstName: String,
   lastName: String,
-  birthDate: BirthDate,
-  courses: [String]
+  courses: {
+    type: Schema.Types.ObjectId,
+    ref: 'Course'
+  }
 });
 
-export default studentSchema;
+const Student = mongoose.model('Student', studentSchema);
+
+export default Student;

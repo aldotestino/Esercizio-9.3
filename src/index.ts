@@ -1,10 +1,8 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { join } from 'path';
 import mongoose from 'mongoose';
 import courseController from './controllers/courseController';
 import studentsController from './controllers/studentsController';
-
-console.log(__dirname);
 
 const PORT = 3000;
 const app = express();
@@ -20,6 +18,10 @@ app.get('/', (req, res) => {
 
 app.use('/courses', courseController);
 app.use('/students', studentsController);
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.send(err.message);
+})
 
 mongoose.connect('mongodb://localhost:27017/uni-db');
 
