@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= course.name %>
+  </title>
+</head>
+
+<body>
+  <a href="/">Home</a>
+  <h1>
+    <%= course.name %>
+  </h1>
+  <p>Tipo: <%= course.type %>
+  </p>
+  <button id="deletebtn">Delete</button>
+  <script>
+    const courseId = '<%= course._id %>';
+    const deletebtn = document.getElementById('deletebtn');
+    deletebtn.addEventListener('click', async e => {
+      e.preventDefault();
+      const res = await fetch(`/courses/${courseId}`, {
+        method: 'DELETE'
+      }).then(r => r.json());
+      if (res.success) {
+        alert('Corso eliminato con successo');
+        window.location.replace('/courses');
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= student._id %>
+  </title>
+</head>
+
+<body>
+  <a href="/">Home</a>
+  <p>Id: <%= student._id %>
+      <br>
+      Nome: <%= student.firstName %>
+        <br>
+        Cognome: <%= student.lastName %>
+  </p>
+  <% if(student.courses.length===0){ %>
+    <p>Lo studente non è iscritto ad alcun corso.</p>
+    <% } else{ %>
+      <ul>
+        <% for(let i=0; i < student.courses.length; i++) {%>
+          <li>
+            <a href="/courses/<%= student.courses[i]._id %>">
+              <%= student.courses[i].name %>
+            </a>
+          </li>
+          <% }%>
+      </ul>
+      <% } %>
+        <p><a href="/students/addcourse?student_id=<%=student._id%>">Clicca qui</a> per iscrivere lo studente a un
+          corso.</p>
+        <button id="deletebtn">Delete</button>
+        <script>
+          const studentId = '<%= student._id %>';
+          const deletebtn = document.getElementById('deletebtn');
+          deletebtn.addEventListener('click', async e => {
+            e.preventDefault();
+            const res = await fetch(`/students/${studentId}`, {
+              method: 'DELETE'
+            }).then(r => r.json());
+            if (res.success) {
+              alert('Studente eliminato con successo');
+              window.location.replace('/students');
+            }
+          })
+        </script>
+</body>
+
+</html>

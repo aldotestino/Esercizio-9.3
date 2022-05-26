@@ -20,8 +20,8 @@ app.use('/courses', courseController);
 app.use('/students', studentsController);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  res.send(err.message);
-})
+  res.json({ error: err.message });
+});
 
 mongoose.connect('mongodb://localhost:27017/uni-db');
 

@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <a href="/">Home</a>
   <h1>Corsi</h1>
   <% if(courses.length===0){ %>
     <p>Non ci sono corsi disponibili, <a href="/courses/add">clicca qui</a> per aggiungere un corso.</p>
@@ -16,7 +17,7 @@
       <ul>
         <% for(let i=0; i < courses.length; i++) {%>
           <li>
-            Nome: <%= courses[i].name %>, Tipo: <%= courses[i].type %>
+            <a href="/courses/<%=courses[i]._id%>">Nome: <%= courses[i].name %></a>
           </li>
           <% }%>
       </ul>

@@ -1,7 +1,16 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from 'mongoose';
+
+interface CourseI {
+  _id: Schema.Types.ObjectId
+  name: string,
+  type: 'Triennale' | 'Magistrale' | 'Master'
+}
 
 const courseSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    unique: true
+  },
   type: {
     type: String,
     enum: {
@@ -10,6 +19,7 @@ const courseSchema = new Schema({
   }
 });
 
-const Course = mongoose.model('Course', courseSchema);
+const Course = mongoose.model('Course', courseSchema, 'course');
 
-export default Course
+export default Course;
+export { CourseI };
