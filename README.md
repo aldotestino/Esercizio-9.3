@@ -27,7 +27,7 @@
 
 - [x] Visualizzazione delle informazioni di un singolo studente
 - [x] Visualizzazione di delle informazioni di un singolo corso di laurea
-- [] Modifica di un singolo studente
-- [] Modifica di un singolo corso di laurea
+- [ ] Modifica di un singolo studente
+- [ ] Modifica di un singolo corso di laurea
 - [x] Eliminazione di un singolo studente
 - [x] Eliminazione di un singolo corso di laurea
