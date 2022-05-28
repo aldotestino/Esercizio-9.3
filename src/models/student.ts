@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import { CourseI } from './course';
 
 interface StudentI {
-  _id: Schema.Types.ObjectId
+  _id: string
   firstName: string
   lastName: string
   courses: Array<CourseI>
@@ -17,7 +17,7 @@ const studentSchema = new Schema({
   }]
 });
 
-const Student = mongoose.model('Student', studentSchema, 'student');
+const StudentModel = mongoose.model<StudentI>('Student', studentSchema, 'student');
 
-export default Student;
+export default StudentModel;
 export { StudentI };

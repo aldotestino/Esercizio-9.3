@@ -19,7 +19,7 @@ courseController.get('/add', (_, res) => {
 
 courseController.post('/add', (req, res) => {
   const newCourse = new Course(req.body);
-  newCourse.save((error: Error) => {
+  newCourse.save((error) => {
     if(error) {
       throw error;
     } else {
@@ -38,8 +38,8 @@ courseController.get('/:course_id', (req, res) => {
   });
 });
 
-courseController.delete('/:course_id', (req, res) => {
-  Course.findOneAndDelete({ _id: req.params.course_id }, (error: Error) => {
+courseController.delete('/', (req, res) => {
+  Course.findOneAndDelete({ _id: req.body.courseId }, (error: Error) => {
     if(error) {
       throw error;
     }else {

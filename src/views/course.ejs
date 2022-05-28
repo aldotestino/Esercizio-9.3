@@ -11,23 +11,26 @@
 </head>
 
 <body>
-  <a href="/">Home</a>
+  <a href="/dashboard">Dashboard</a>
   <h1>
     <%= course.name %>
   </h1>
   <p>Tipo: <%= course.type %>
   </p>
-  <button id="deletebtn">Delete</button>
+  <button id="deletebtn">Elimina</button>
   <script>
     const courseId = '<%= course._id %>';
     const deletebtn = document.getElementById('deletebtn');
     deletebtn.addEventListener('click', async e => {
       e.preventDefault();
-      const res = await fetch(`/courses/${courseId}`, {
-        method: 'DELETE'
+      const res = await fetch('/courses', {
+        method: 'DELETE',
+        body: JSON.stringify({ courseId }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }).then(r => r.json());
       if (res.success) {
-        alert('Corso eliminato con successo');
         window.location.replace('/courses');
       }
     })

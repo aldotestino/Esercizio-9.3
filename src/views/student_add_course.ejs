@@ -9,11 +9,11 @@
 </head>
 
 <body>
-  <a href="/">Home</a>
+  <a href="/dashboard">Dashboard</a>
   <h1>Aggiungi corso a studente</h1>
   <form action="/students/addcourse" method="post">
     <label for="student_id">Id studente</label>
-    <input type="text" name="student_id" id="student_id">
+    <input type="text" name="student_id" id="student_id" value=<%=studentId %> >
     <select name="course_id" id="course_id">
       <% for(let i=0; i < courses.length; i++) { %>
         <option value=<%=courses[i]._id %>>
@@ -23,11 +23,6 @@
     </select>
     <button type="submit">Aggiungi</button>
   </form>
-  <script>
-    const idInput = document.getElementById('student_id');
-    const u = new URL(document.URL);
-    idInput.value = u.searchParams.get('student_id');
-  </script>
 </body>
 
 </html>

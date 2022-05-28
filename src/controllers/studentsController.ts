@@ -1,4 +1,4 @@
-import e, { Router } from 'express';
+import { Router } from 'express';
 import Course, { CourseI } from '../models/course';
 import Student, { StudentI } from '../models/student';
 
@@ -20,7 +20,7 @@ studentsController.get('/add', (req, res) => {
 
 studentsController.post('/add', (req, res) => {
   const newStudent = new Student(req.body);
-  newStudent.save((error: Error, data: StudentI) => {
+  newStudent.save((error, data) => {
     if(error) {
       throw error;
     }else {
@@ -34,7 +34,7 @@ studentsController.get('/addcourse', (req, res) => {
     if(error) {
       throw error;
     }else {
-      res.render('student_add_course', { courses: data });
+      res.render('student_add_course', { courses: data, studentId: req.query.student_id });
     }
   });
 });
@@ -63,8 +63,24 @@ studentsController.get('/:student_id', (req, res) => {
   });
 });
 
-studentsController.delete('/:student_id', (req, res) => {
-  Student.findOneAndDelete({ _id: req.params.student_id }, (error: Error) => {
+studentsController.delete('/', (req, res) => {
+  Student.findOneAndDelete({ _id: req.body.studentId }, (error: Error) => {
+    if(error) {
+      throw error;
+    }else {
+      res.json({
+        success: true
+      });
+    }
+  });
+});
+
+studentsController.delete('/removecourse', (req, res) => {
+  Student.findOneAndUpdate({ _id: req.body.studentId }, {
+    $pull: {
+      courses: req.body.courseId
+    }
+  }, (error: Error) => {
     if(error) {
       throw error;
     }else {

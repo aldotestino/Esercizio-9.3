@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <a href="/">Home</a>
+  <a href="/dashboard">Dashboard</a>
   <p>Id: <%= student._id %>
       <br>
       Nome: <%= student.firstName %>
@@ -23,30 +23,55 @@
     <% } else{ %>
       <ul>
         <% for(let i=0; i < student.courses.length; i++) {%>
-          <li>
+          <li id=<%=student.courses[i]._id %>>
             <a href="/courses/<%= student.courses[i]._id %>">
               <%= student.courses[i].name %>
             </a>
+            <button class="delcourse" id="btn.<%=student.courses[i]._id %>">Rimuovi corso</button>
           </li>
           <% }%>
       </ul>
       <% } %>
         <p><a href="/students/addcourse?student_id=<%=student._id%>">Clicca qui</a> per iscrivere lo studente a un
           corso.</p>
-        <button id="deletebtn">Delete</button>
+        <button id="delstud">Elimina studente</button>
+
         <script>
           const studentId = '<%= student._id %>';
-          const deletebtn = document.getElementById('deletebtn');
-          deletebtn.addEventListener('click', async e => {
+          const delstud = document.getElementById('delstud');
+          delstud.addEventListener('click', async e => {
             e.preventDefault();
-            const res = await fetch(`/students/${studentId}`, {
-              method: 'DELETE'
+            const res = await fetch(`/students`, {
+              method: 'DELETE',
+              body: JSON.stringify({ studentId }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
             }).then(r => r.json());
             if (res.success) {
-              alert('Studente eliminato con successo');
               window.location.replace('/students');
             }
-          })
+          });
+
+          const delcourse = document.getElementsByClassName('delcourse');
+
+          [...delcourse].forEach(btn => {
+            btn.addEventListener('click', async e => {
+              e.preventDefault();
+              const courseId = btn.id.split('.')[1];
+
+              const res = await fetch('/students/removecourse', {
+                method: 'DELETE',
+                body: JSON.stringify({ studentId, courseId }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              }).then(r => r.json());
+              if (res.success) {
+                document.getElementById(courseId).remove()
+              }
+            })
+          });
         </script>
 </body>
 

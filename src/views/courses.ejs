@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <a href="/">Home</a>
+  <a href="/dashboard">Dashboard</a>
   <h1>Corsi</h1>
   <% if(courses.length===0){ %>
     <p>Non ci sono corsi disponibili, <a href="/courses/add">clicca qui</a> per aggiungere un corso.</p>
@@ -17,7 +17,9 @@
       <ul>
         <% for(let i=0; i < courses.length; i++) {%>
           <li>
-            <a href="/courses/<%=courses[i]._id%>">Nome: <%= courses[i].name %></a>
+            <a href="/courses/<%=courses[i]._id%>">
+              <%= courses[i].name %>
+            </a>
           </li>
           <% }%>
       </ul>

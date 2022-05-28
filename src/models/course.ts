@@ -1,8 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
 
 interface CourseI {
-  _id: Schema.Types.ObjectId
-  name: string,
+  _id: string
+  name: string
   type: 'Triennale' | 'Magistrale' | 'Master'
 }
 
@@ -19,7 +19,7 @@ const courseSchema = new Schema({
   }
 });
 
-const Course = mongoose.model('Course', courseSchema, 'course');
+const CourseModel = mongoose.model<CourseI>('Course', courseSchema, 'course');
 
-export default Course;
+export default CourseModel;
 export { CourseI };

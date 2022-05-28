@@ -31,3 +31,6 @@
 - [ ] Modifica di un singolo corso di laurea
 - [x] Eliminazione di un singolo studente
 - [x] Eliminazione di un singolo corso di laurea
+
+- [x] Implementazione login
+- [x] Rimuovere corso da uno studente

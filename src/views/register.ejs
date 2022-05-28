@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrati</title>
+</head>
+
+<body>
+  <h1>Registrati</h1>
+  <form action="/user/register" method="post">
+    <label for="firstName">Nome</label>
+    <input type="text" name="firstName" id="firstName">
+    <label for="lastName">Cognome</label>
+    <input type="text" name="lastName" id="lastName">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+    <button type="submit">Registrati</button>
+  </form>
+  <a href="/user/login">Hai già un account?</a>
+</body>
+
+</html>
