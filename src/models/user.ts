@@ -1,4 +1,4 @@
-import mongoose, { Document, PassportLocalDocument, PassportLocalModel, PassportLocalSchema, Schema } from 'mongoose';
+import mongoose, { Document, PassportLocalDocument, PassportLocalModel, Schema } from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
 
 interface UserI extends PassportLocalDocument {
